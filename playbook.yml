@@ -1,0 +1,48 @@
+---
+- hosts: kvm
+  tasks:
+    - name: install KVM packages and dependent tools
+      package:
+        name:
+          - qemu-kvm
+          - libvirt-daemon-system
+          - libvirt-clients
+          - bridge-utils
+          - virtinst
+          - kvmtool
+        state: present
+      become: yes
+    
+    # ansible_user is undefined, seems to be related to the use of become:yes
+    # for this reason I am using whoami, to look up the current ssh user
+    - name: set libvert user
+      set_fact:
+        libvert_user: "{{ lookup('pipe', 'whoami') }}"
+    
+    - name: add ansible user to libvert
+      user:
+        name: "{{ libvert_user }}"
+        state: present
+        groups: "libvirt"
+        append: yes
+      become: yes
+
+    - name: start service libvirtd
+      service:
+        name: libvirtd
+        state: started
+        enabled: yes
+    
+    - name: install cockpit
+      package:
+        name:
+          - cockpit
+          - cockpit-machines
+        state: present
+      become: yes
+    
+    - name: start service cockpit
+      service:
+        name: cockpit
+        state: started
+        enabled: yes

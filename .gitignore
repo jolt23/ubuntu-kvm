@@ -1,0 +1,42 @@
+#######          macOS          #######
+.DS_Store
+
+#######         Vagrant         #######
+.vagrant
+vagrant/**/override.yml
+vagrant-override.yml
+
+#######         Ansible         #######
+*.retry
+provisioning/roles-galaxy
+
+
+#######         VS Code         #######
+.vscode/
+
+#######        Terraform        #######
+.terraform
+terraform.tfstate
+terraform.tfvars
+*.tfstate*
+
+#######         Packer          #######
+.DS_Store
+*.box
+*.gz
+*.iso
+*.tar
+*.swp
+ISOs/*
+crash.log
+packer/**/output*
+.vagrant/
+box/
+packer_cache/
+tmp/
+
+#######        Molecule         #######
+.pytest_cache/
+__pycache__/
+pytestdebug.log
+*.pyc

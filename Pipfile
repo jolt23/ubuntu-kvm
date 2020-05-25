@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+pylint = "*"
+
+[packages]
+ansible = "~=2.9.9"
+ansible-lint = "~=4.2.0"
+molecule = "~=3.0.4"
+safety = "~=1.9.0"
+
+[requires]
+python_version = "3.8"
